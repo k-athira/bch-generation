@@ -47,10 +47,10 @@ void loop(){
   
   //bch_gen( emg_msg, msgLength_2, genLength_2 , emgLength_2  , msg_offset_2  );
 
-  for( int i = 0; i < 144 ; i++)
+  /*for( int i = 0; i < 144 ; i++)
   {
       Serial.print( emg_msg[ i ] );
-  }
+  }*/
 
   delay(1000); 
 
@@ -95,6 +95,15 @@ void bch_gen( bool* emg_msg , uint8_t msgLength, uint8_t genLength , uint8_t emg
       bch12_Generator( genPolynomial);
     }
 
+
+    //////////////////////////////////////////////test 
+
+    for( int k = 0 ; k < genLength ; k++)
+    {
+      	Serial.println(genPolynomial[k]) ;
+    }
+
+    ////////////////////////////////////////////////////
     for (int i = 0; i < (msgLength - genLength +1) ; i++ )
     {
         if (msgPolynomial[ i ] == true )
@@ -103,13 +112,14 @@ void bch_gen( bool* emg_msg , uint8_t msgLength, uint8_t genLength , uint8_t emg
 
           for (int k = temp ; k < ( genLength + temp + 1 ) ; k++ )
           {
-            Serial.println(msgPolynomial[ k ]);
-            Serial.println(genPolynomial[ k - temp ]);
+            //Serial.println(msgPolynomial[ k ]);
+            //Serial.println(genPolynomial[ k - temp ]);
 
             msgPolynomial[ k ] = ( ( msgPolynomial[ k ] ) ^ ( genPolynomial[ k - temp ] ) );
-            Serial.print( k );
-            Serial.print( " " );
-            Serial.println(msgPolynomial[ k ]);
+
+            //Serial.print( k );
+            //Serial.print( " " );
+            //Serial.println(msgPolynomial[ k ]);
           }
         }
     }
@@ -120,11 +130,11 @@ void bch_gen( bool* emg_msg , uint8_t msgLength, uint8_t genLength , uint8_t emg
       emg_msg[  k + emgLength + msg_offset  ] = msgPolynomial[ k + emgLength ];
     }
 
-    for( int k = 0; k < emgLength ; k++ )
+    /*for( int k = 0; k < emgLength ; k++ )
     {
       Serial.print( msgPolynomial[ k + emgLength ]);
     } 
-    Serial.println(" ");
+    Serial.println(" ");*/
 }
 
 

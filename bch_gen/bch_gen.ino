@@ -55,7 +55,7 @@ void loop(){
   delay(1000); 
 
   Serial.println(" ");
-  bch_gen( emg_msg, msgLength_1, genLength_1 , emgLength_1  , msg_offset_1  );
+  bch_gen( msgLength_1, genLength_1 , emgLength_1  , msg_offset_1  );
 
 
   delay(1000); 
@@ -66,14 +66,14 @@ void loop(){
 //////////////////////////////////     function definitions    /////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 
-void bch_gen( bool* emg_msg , uint8_t msgLength, uint8_t genLength , uint8_t emgLength , uint8_t msg_offset  )
+void bch_gen( uint8_t msgLength, uint8_t genLength , uint8_t emgLength , uint8_t msg_offset  )
 {
     Serial.println("Entering bch_gen");
     bool msgPolynomial [ msgLength ];   
     bool genPolynomial [ genLength ];
 
 
-    for( int k = 0; k < emgLength ; k++ )
+    for( int k = 0; k < emgLength  ; k++ )
     {
       msgPolynomial[ k ] = emg_msg[ msg_offset + k ];
     }

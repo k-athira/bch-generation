@@ -96,11 +96,12 @@ void bch_gen( bool* emg_msg , uint8_t msgLength, uint8_t genLength , uint8_t emg
     }
 
 
-    //////////////////////////////////////////////test 
+    //////////////////////////////////////////////       test 
 
     for( int k = 0 ; k < genLength ; k++)
     {
-      	Serial.println(genPolynomial[k]) ;
+      	Serial.print( k ) ;
+      	Serial.println( genPolynomial [ k ] ) ;
     }
 
     ////////////////////////////////////////////////////

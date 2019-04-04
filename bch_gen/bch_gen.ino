@@ -47,17 +47,20 @@ void loop(){
   
   //bch_gen( emg_msg, msgLength_2, genLength_2 , emgLength_2  , msg_offset_2  );
 
-  /*for( int i = 0; i < 144 ; i++)
+
+  for( int i = 0; i < 144 ; i++)
   {
       Serial.print( emg_msg[ i ] );
-  }*/
-
-  delay(1000); 
-
+  }
   Serial.println(" ");
+  
   bch_gen( msgLength_1, genLength_1 , emgLength_1  , msg_offset_1  );
 
-
+  for( int i = 0; i < 144 ; i++)
+  {
+      Serial.print( emg_msg[ i ] );
+  }
+  Serial.println(" ");
   delay(1000); 
   
 }
@@ -68,7 +71,15 @@ void loop(){
 
 void bch_gen( uint8_t msgLength, uint8_t genLength , uint8_t emgLength , uint8_t msg_offset  )
 {
+
     Serial.println("Entering bch_gen");
+    
+    Serial.println(msgLength);
+    Serial.println(genLength);
+    
+    Serial.println(emgLength);
+    Serial.println(msg_offset);
+    
     bool msgPolynomial [ msgLength ];   
     bool genPolynomial [ genLength ];
 
@@ -95,19 +106,9 @@ void bch_gen( uint8_t msgLength, uint8_t genLength , uint8_t emgLength , uint8_t
       bch12_Generator( genPolynomial);
     }
 
-
-    //////////////////////////////////////////////       test 
-
-    for( int k = 0 ; k < genLength ; k++)
-    {
-      	Serial.print( k ) ;
-      	Serial.println( genPolynomial [ k ] ) ;
-    }
-
-    ////////////////////////////////////////////////////
     for (int i = 0; i < (msgLength - genLength +1) ; i++ )
     {
-        if (msgPolynomial[ i ] == true )
+        if ( msgPolynomial[ i ] == true )
         {
           int temp = i;
 
@@ -128,14 +129,14 @@ void bch_gen( uint8_t msgLength, uint8_t genLength , uint8_t emgLength , uint8_t
 
     for( int k = 0; k < emgLength ; k++ )
     {
-      emg_msg[  k + emgLength + msg_offset  ] = msgPolynomial[ k + emgLength ];
+      emg_msg[  k + emgLength + msg_offset  ] = msgPolynomial[ k + emgLength - 1 ];
     }
 
-    /*for( int k = 0; k < emgLength ; k++ )
+    for( int k = 0; k < emgLength ; k++ )
     {
-      Serial.print( msgPolynomial[ k + emgLength ]);
+      Serial.print( msgPolynomial[ k + emgLength - 1]);
     } 
-    Serial.println(" ");*/
+    Serial.println(" ");
 }
 
 

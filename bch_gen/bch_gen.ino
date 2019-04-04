@@ -102,7 +102,7 @@ void bch_gen( bool* emg_msg , uint8_t msgLength, uint8_t genLength , uint8_t emg
           int temp = i;
           for (int k = temp ; k < ( genLength + temp + 1 ) ; k++ )
           {
-            msgPolynomial[ k ] = ( msgPolynomial[ k ] ^ genPolynomial[ k - temp ] );
+            msgPolynomial[ k ] = ( (msgPolynomial[ k ]) ^ (genPolynomial[ k - temp ] );
           }
         }
     }

@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 bool emg_msg[ 144 ] ;
-
+bool biphase_msg[ 288 ];
 uint8_t msgLength_1 = 82 ;
 uint8_t genLength_1 = 22 ;
 uint8_t emgLength_1 = 61 ;
@@ -303,4 +303,13 @@ void message_assign(bool* message ){
     {
       message[i]= false;  
     }
+}
+////////////////////////////////////////////////////////////// biphase 
+void emgto_biphase(){
+  for(int i = 0 ; i<144; i){
+    if( emg_msg[i] == true){
+        biphase_msg[ (i*2) ] = emg_msg[i];
+        biphase_msg[ (i*2) + 1 ] = ~ (emg_msg[i]) ;
+    }
+  }
 }

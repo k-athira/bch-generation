@@ -49,6 +49,7 @@ void loop(){
   Serial.println(" ");
   
   bch_gen( msgLength_1, genLength_1 , emgLength_1  , msg_offset_1  );
+  bch_gen( msgLength_2, genLength_2 , emgLength_2  , msg_offset_2  );
 
   for( int i = 0; i < 144 ; i++)
   {
@@ -108,15 +109,11 @@ void bch_gen( uint8_t msgLength, uint8_t genLength , uint8_t emgLength , uint8_t
 
           for (int k = temp ; k < ( genLength + temp ) ; k++ )
           {
-            //Serial.println(msgPolynomial[ k ]);
-            //Serial.println(genPolynomial[ k - temp ]);
-
+            
             msgPolynomial[ k ] = ( ( msgPolynomial[ k ] ) ^ ( genPolynomial[ k - temp ] ) );
 
-            //Serial.print( k );
-            //Serial.print( " " );
-            //Serial.println(msgPolynomial[ k ]);
           }
+          
         }
     }
 

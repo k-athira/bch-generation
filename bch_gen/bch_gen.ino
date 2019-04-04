@@ -85,7 +85,7 @@ void bch_gen( uint8_t msgLength, uint8_t genLength , uint8_t emgLength , uint8_t
     }
 
 
-    if( genLength = msgLength_1 )
+    if( genLength == genLength_1 )
     {
       bch21_Generator( genPolynomial);
     }

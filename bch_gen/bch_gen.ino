@@ -20,10 +20,6 @@ uint8_t msg_offset_2 = 106 ;
 ///////////////////////////////////////////////////////////////////////////////
 
 
-//void message_assign(bool* message );
-//void bch21_Generator(bool* genPolynomial);
-//void bch12_Generator(bool* genPolynomial);
-//void bch_gen( bool* emg_msg, uint8_t msgLength, uint8_t genLength , uint8_t emgLength  , uint8_t msg_offset  );
 
 //////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////  void setup    /////////////////////////
@@ -32,7 +28,6 @@ uint8_t msg_offset_2 = 106 ;
 void setup(){
   
   Serial.begin(9800);
-  Serial.println(" Entering setup ");
   
 }
 
@@ -42,7 +37,6 @@ void setup(){
 
 void loop(){
   
-  Serial.println( " Entering loop " );
   message_assign( emg_msg );
   
   //bch_gen( emg_msg, msgLength_2, genLength_2 , emgLength_2  , msg_offset_2  );
@@ -112,7 +106,7 @@ void bch_gen( uint8_t msgLength, uint8_t genLength , uint8_t emgLength , uint8_t
         {
           int temp = i;
 
-          for (int k = temp ; k < ( genLength + temp + 1 ) ; k++ )
+          for (int k = temp ; k < ( genLength + temp ) ; k++ )
           {
             //Serial.println(msgPolynomial[ k ]);
             //Serial.println(genPolynomial[ k - temp ]);
@@ -127,12 +121,12 @@ void bch_gen( uint8_t msgLength, uint8_t genLength , uint8_t emgLength , uint8_t
     }
 
 
-    for( int k = 0; k < emgLength ; k++ )
+    for( int k = 0; k < genLength ; k++ )
     {
       emg_msg[  k + emgLength + msg_offset  ] = msgPolynomial[ k + emgLength - 1 ];
     }
 
-    for( int k = 0; k < emgLength ; k++ )
+    for( int k = 0; k < genLength ; k++ )
     {
       Serial.print( msgPolynomial[ k + emgLength - 1]);
     } 
